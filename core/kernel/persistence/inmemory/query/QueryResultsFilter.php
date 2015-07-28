@@ -70,6 +70,8 @@ class QueryResultsFilter
         if( $lang !== '' ){
             $this->filter['lg'][] = $lang;
         }
+
+        return $this;
     }
 
     public function order($by, $direction = self::ORDER_ASC)
