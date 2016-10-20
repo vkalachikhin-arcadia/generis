@@ -6,14 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace oat\generis\test\model\Resource;
+namespace oat\generis\test\model\resource;
 
 use oat\generis\model\kernel\persistence\smoothsql\search\ComplexSearchService;
 use oat\generis\model\kernel\persistence\smoothsql\search\GateWay;
 use oat\generis\model\kernel\persistence\smoothsql\search\TaoResultSet;
-use oat\generis\model\Resource\AbstractCreateOrReuse;
-use oat\generis\model\Resource\CreateOrReuseInterface;
-use oat\generis\model\Resource\exception\DuplicateResourceException;
+use oat\generis\model\resource\AbstractCreateOrReuse;
+use oat\generis\model\resource\CreateOrReuseInterface;
+use oat\generis\model\resource\exception\DuplicateResourceException;
 use oat\oatbox\service\ServiceManager;
 use oat\search\base\QueryBuilderInterface;
 use oat\search\base\ResultSetInterface;
