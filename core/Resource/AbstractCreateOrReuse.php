@@ -26,6 +26,7 @@ use oat\generis\model\kernel\persistence\smoothsql\search\ComplexSearchService;
 use oat\generis\model\kernel\persistence\smoothsql\search\TaoResultSet;
 use oat\generis\model\Resource\exception\DuplicateResourceException;
 use oat\oatbox\service\ConfigurableService;
+use oat\generis\model\OntologyAwareTrait;
 
 /**
  * Abstract base of CreateAndReuse service
@@ -36,6 +37,8 @@ abstract class AbstractCreateOrReuse
     extends ConfigurableService
     implements CreateOrReuseInterface
 {
+    use OntologyAwareTrait;
+
     /**
      * resource type 
      * @var string
@@ -49,10 +52,12 @@ abstract class AbstractCreateOrReuse
     protected $uniquePredicate = [];
 
     /**
+     * WILL break on non smooth implementations
+     *
      * @return ComplexSearchService
      */
     protected function getSearchService() {
-        return $this->getServiceManager()->get(self::SEARCH_SERVICE_ID);
+        return $this->getModel()->getComplexSearch();
     }
     
     /**
@@ -87,8 +92,7 @@ abstract class AbstractCreateOrReuse
      * @return core_kernel_classes_Resource
      */
     protected function createResource(array $values)  {
-        $class = new core_kernel_classes_Class($this->type);
-        return $class->createInstanceWithProperties($values);
+        return $this->getClass($this->type)->createInstanceWithProperties($values);
     }
 
     /**

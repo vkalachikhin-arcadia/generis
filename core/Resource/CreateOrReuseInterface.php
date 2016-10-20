@@ -26,10 +26,6 @@ namespace oat\generis\model\Resource;
  */
 interface CreateOrReuseInterface
 {
-    
-    const SEARCH_SERVICE_ID = 'generis/complexSearch';
-
-
     /**
      * return existing resource or create if not exists
      * @param array $values

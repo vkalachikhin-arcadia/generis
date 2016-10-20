@@ -274,6 +274,11 @@ class Updater extends common_ext_ExtensionUpdater {
         $this->skip('3.0.0', '3.2.0');
         
         if ($this->isVersion('3.2.0')) {
+            $model = ModelManager::getModel();
+            if ($model instanceof \core_kernel_persistence_smoothsql_SmoothModel) {
+                $model->setOption(\core_kernel_persistence_smoothsql_SmoothModel, ComplexSearchService::SERVICE_ID);
+                ModelManager::setModel($model);
+            }
             $createOrReuse = new CreateOrReuseService([]);
             $this->getServiceManager()->register(CreateOrReuseService::SERVICE_ID ,$createOrReuse);
             $this->setVersion('3.3.0');
