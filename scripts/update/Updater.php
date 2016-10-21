@@ -39,7 +39,6 @@ use oat\generis\model\data\permission\PermissionManager;
 use oat\generis\model\fileReference\FileReferenceSerializer;
 use oat\generis\model\fileReference\ResourceFileSerializer;
 use oat\generis\model\kernel\persistence\smoothsql\search\ComplexSearchService;
-use oat\generis\model\resource\CreateOrReuseService;
 use oat\oatbox\action\ActionService;
 use oat\oatbox\event\EventManager;
 use oat\oatbox\filesystem\FileSystemService;
@@ -270,21 +269,17 @@ class Updater extends common_ext_ExtensionUpdater {
             $this->getServiceManager()->register(ComplexSearchService::SERVICE_ID, $complexSearch);
             $this->setVersion('3.0.0');
         }
-
-        $this->skip('3.0.0', '3.2.0');
         
-        if ($this->isVersion('3.2.0')) {
+        $this->skip('3.0.0', '3.5.1');
+
+        if ($this->isVersion('3.5.1')) {
             $model = ModelManager::getModel();
             if ($model instanceof \core_kernel_persistence_smoothsql_SmoothModel) {
                 $model->setOption(\core_kernel_persistence_smoothsql_SmoothModel, ComplexSearchService::SERVICE_ID);
                 ModelManager::setModel($model);
             }
-            $createOrReuse = new CreateOrReuseService([]);
-            $this->getServiceManager()->register(CreateOrReuseService::SERVICE_ID ,$createOrReuse);
-            $this->setVersion('3.3.0');
+            $this->setVersion('3.6.0');
         }
-        
-        $this->skip('3.3.0', '3.4.0');
     }
     
     private function getReadableModelIds() {
