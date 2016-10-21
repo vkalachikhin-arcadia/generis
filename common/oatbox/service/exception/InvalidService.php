@@ -24,6 +24,6 @@ namespace oat\oatbox\service\exception;
 /**
  * @author Christophe GARCIA <christopheg@taotesting.com>
  */
-class InvalidService  extends \exception {
+class InvalidService  extends \common_exception_InconsistentData {
     
 }
