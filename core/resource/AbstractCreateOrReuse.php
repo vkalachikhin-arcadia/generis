@@ -18,13 +18,13 @@
  * 
  */
 
-namespace oat\generis\model\Resource;
+namespace oat\generis\model\resource;
 
 use core_kernel_classes_Class;
 use core_kernel_classes_Resource;
 use oat\generis\model\kernel\persistence\smoothsql\search\ComplexSearchService;
 use oat\generis\model\kernel\persistence\smoothsql\search\TaoResultSet;
-use oat\generis\model\Resource\exception\DuplicateResourceException;
+use oat\generis\model\resource\exception\DuplicateResourceException;
 use oat\oatbox\service\ConfigurableService;
 use oat\generis\model\OntologyAwareTrait;
 
@@ -38,18 +38,21 @@ abstract class AbstractCreateOrReuse
     implements CreateOrReuseInterface
 {
     use OntologyAwareTrait;
-
-    /**
-     * resource type 
-     * @var string
-     */
-    protected $type;
     
     /**
-     * property list
-     * @var array 
+     * Returns the common parent all resources have
+     *
+     * @return \core_kernel_classes_Class
      */
-    protected $uniquePredicate = [];
+    abstract public function getParentClass();
+    
+    /**
+     * List of keys that need to be identical between
+     * two resources to represent equivalence
+     *
+     * @return string[]
+     */
+    abstract public function getUniquePredicates();
 
     /**
      * WILL break on non smooth implementations
@@ -72,11 +75,11 @@ abstract class AbstractCreateOrReuse
         
         $searchQueryBuilder = $gateWay->query();
         
-        $searchService->searchType($searchQueryBuilder, $this->type , true);
+        $searchService->searchType($searchQueryBuilder, $this->getParentClass()->getUri() , true);
         
         $criterion = $searchQueryBuilder->newQuery();
         
-        foreach ($this->uniquePredicate as $field) {
+        foreach ($this->getUniquePredicates() as $field) {
             $value = $values[$field];
             $criterion->add($field)->equals($value);
         }
@@ -92,7 +95,7 @@ abstract class AbstractCreateOrReuse
      * @return core_kernel_classes_Resource
      */
     protected function createResource(array $values)  {
-        return $this->getClass($this->type)->createInstanceWithProperties($values);
+        return $this->getParentClass()->createInstanceWithProperties($values);
     }
 
     /**
@@ -111,7 +114,7 @@ abstract class AbstractCreateOrReuse
         } elseif($count === 0) {
             return false;
         } else {
-            throw new DuplicateResourceException($this->type , $values);
+            throw new DuplicateResourceException($this->getParentClass()->getUri() , $values);
         }
     }
     
@@ -131,7 +134,7 @@ abstract class AbstractCreateOrReuse
         } elseif($count === 0) {
             return $this->createResource($values);
         } else {
-            throw new DuplicateResourceException($this->type , $values);
+            throw new DuplicateResourceException($this->getParentClass()->getUri() , $values);
         }
     }
     

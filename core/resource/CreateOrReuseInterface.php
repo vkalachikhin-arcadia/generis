@@ -18,20 +18,26 @@
  * 
  */
 
-namespace oat\generis\model\Resource;
 
-use oat\oatbox\service\AbstractServiceAggregator;
+namespace oat\generis\model\resource;
 
-class CreateOrReuseService extends AbstractServiceAggregator
+/**
+ * 
+ */
+interface CreateOrReuseInterface
 {
-    
-    const SERVICE_ID = 'generis/createOrReuse';
+    /**
+     * return existing resource or create if not exists
+     * @param array $values
+     * @return \core_kernel_classes_Resource
+     */
+    public function getResource(array $values); 
     
     /**
-     * interface subservices must implement
-     * @var string 
+     * return if resource exists
+     * @param array $values
+     * @return boolean
      */
-    protected $subServiceInterface = CreateOrReuseInterface::class;
-    
+    public function hasResource(array $values);
 }
 

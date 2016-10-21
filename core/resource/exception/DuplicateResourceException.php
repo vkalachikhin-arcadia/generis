@@ -18,7 +18,7 @@
  * 
  */
 
-namespace oat\generis\model\Resource\exception;
+namespace oat\generis\model\resource\exception;
 
 /**
  * @author Christophe GARCIA <christopheg@taotesting.com>
