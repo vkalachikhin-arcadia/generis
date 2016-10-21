@@ -125,11 +125,13 @@ class ServiceManager implements ServiceLocatorInterface
     }
     
     /**
-    * propagate service manager
-    * @param type $service
-    * @return mixed
-    */
-    public function propagate($service) {
+     * Propagate service dependencies
+     *
+     * @param  $service
+     * @return mixed
+     */
+    public function propagate($service)
+    {
          if(is_object($service) &&  ($service instanceof ServiceLocatorAwareInterface)){
             $service->setServiceLocator($this);
         }
@@ -138,14 +140,15 @@ class ServiceManager implements ServiceLocatorInterface
 
 
     /**
-     * service or sub-sevice factory
-     * @param string $className
+     * Service or sub-service factory
+     *
+     * @param $className
      * @param array $options
-     * @return oject
+     * @return mixed
      */
-    public function build($className , array $options = [] ) {
-
-        if (is_a($className, Configurable::class)) {
+    public function build($className , array $options = [] )
+    {
+        if (is_a($className, Configurable::class, true)) {
             $service = new $className($options);
             $this->propagate($service);
             return $service;
