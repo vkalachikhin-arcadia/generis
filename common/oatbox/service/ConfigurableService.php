@@ -79,30 +79,31 @@ abstract class ConfigurableService extends Configurable implements ServiceLocato
     }
 
     /**
-     * @param      $serviceOption
-     * @param null $interface
+     * @param $serviceDefinition
+     * @param string $interfaceName
      *
-     * @return null|object
+     * @return ConfigurableService
      * @throws InvalidService
      */
-    private function buildService($serviceOption, $interface = null)
+    protected function buildService($serviceDefinition, $interfaceName = null)
     {
-        if ($serviceOption instanceof ConfigurableService) {
-            if (is_null($interface) || is_a($serviceOption, $interface)) {
-                $this->getServiceManager()->propagate($serviceOption);
-                return $serviceOption;
+        if ($serviceDefinition instanceof ConfigurableService) {
+            if (is_null($interfaceName) || is_a($serviceDefinition, $interfaceName)) {
+                $this->getServiceManager()->propagate($serviceDefinition);
+                return $serviceDefinition;
             } else {
                 throw new InvalidService('Service must implements ' . $interface);
             }
-        } elseif (is_array($serviceOption) && isset($serviceOption['class'])) {
-            $classname = $serviceOption['class'];
-            $options = isset($serviceOption['options']) ? $serviceOption['options'] : [];
-            if (is_null($interface) || is_a($classname, $interface, true)) {
+        } elseif (is_array($serviceDefinition) && isset($serviceDefinition['class'])) {
+            $classname = $serviceDefinition['class'];
+            $options = isset($serviceDefinition['options']) ? $serviceDefinition['options'] : [];
+            if (is_null($interfaceName) || is_a($classname, $interfaceName, true)) {
                 return $this->getServiceManager()->build($classname, $options);
             } else {
                 throw new InvalidService('Service must implements ' . $interface);
             }
+        } else {
+            throw new InvalidService();
         }
-        return null;
     }
 }

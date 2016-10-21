@@ -67,15 +67,6 @@ class core_kernel_persistence_smoothsql_SmoothModel extends ConfigurableService
         return $property;
     }
 
-    /**
-     * @return ComplexSearchService
-     */
-    function getComplexSearch() {
-        $search = $this->getServiceManager()->get($this->getOption(self::OPTION_SEARCH_SERVICE));
-        $search->setModel($this);
-        return $search;
-    }
-
     public function getPersistence() {
         if (is_null($this->persistence)) {
             $this->persistence = common_persistence_SqlPersistence::getPersistence($this->getOption(self::OPTION_PERSISTENCE));
@@ -99,6 +90,15 @@ class core_kernel_persistence_smoothsql_SmoothModel extends ConfigurableService
         return new core_kernel_persistence_smoothsql_SmoothRdfs($this);
     }
     
+    /**
+     * @return ComplexSearchService
+     */
+    public function getSearchInterface() {
+        $search = $this->getServiceManager()->get($this->getOption(self::OPTION_SEARCH_SERVICE));
+        $search->setModel($this);
+        return $search;
+    }
+
     // Manage the sudmodels of the smooth mode
     
     /**

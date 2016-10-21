@@ -60,7 +60,7 @@ abstract class AbstractCreateOrReuse
      * @return ComplexSearchService
      */
     protected function getSearchService() {
-        return $this->getModel()->getComplexSearch();
+        return $this->getModel()->getSearchInterface();
     }
     
     /**

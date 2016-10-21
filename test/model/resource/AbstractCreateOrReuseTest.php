@@ -43,7 +43,7 @@ class AbstractCreateOrReuseTest extends TaoPhpUnitTestRunner {
         $searchMock     = $this->prophesize(ComplexSearchService::class)->reveal();
         
         $modelProphet = $this->prophesize(\core_kernel_persistence_smoothsql_SmoothModel::class);
-        $modelProphet->getComplexSearch()
+        $modelProphet->getSearchInterface()
                 ->willReturn($searchMock);
         
         $modelMock = $modelProphet->reveal();
