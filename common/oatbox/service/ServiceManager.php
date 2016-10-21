@@ -21,6 +21,7 @@
 namespace oat\oatbox\service;
 
 use common_ext_ExtensionsManager;
+use oat\oatbox\Configurable;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 /**
@@ -143,14 +144,13 @@ class ServiceManager implements ServiceLocatorInterface
      * @return oject
      */
     public function build($className , array $options = [] ) {
-        
-        $service = new $className();
-        
-        $this->propagate($service);
-        
-        if ($service instanceof \oat\oatbox\Configurable) {
-            $service->setOptions($options);
+
+        if (is_a($className, Configurable::class)) {
+            $service = new $className($options);
+            $this->propagate($service);
+            return $service;
         }
-        return $service;
+
+        throw new ServiceNotFoundException($className);
     }
 }

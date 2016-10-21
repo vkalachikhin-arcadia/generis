@@ -20,6 +20,7 @@
 namespace oat\oatbox\service;
 
 use oat\oatbox\Configurable;
+use oat\oatbox\service\exception\InvalidService;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
@@ -55,17 +56,21 @@ abstract class ConfigurableService extends Configurable implements ServiceLocato
     /**
      * Get a subservice from the current service
      *
-     * @param unknown $id
+     * @param $id
      * @param string $interface
      * @throws ServiceNotFoundException
-     * @return multitype:
+     * @return object
      */
     public function getSubService($id, $interface = null)
     {
         if (! isset($this->subServices[$id])) {
             if ($this->hasOption($id)) {
-                $service = $this->buildService($this->getOption($id));
-                $this->subServices[$id] = $service;
+                $service = $this->buildService($this->getOption($id), $interface);
+                if ($service) {
+                    $this->subServices[$id] = $service;
+                } else {
+                    throw new ServiceNotFoundException($id);
+                }
             } else {
                 throw new ServiceNotFoundException($id);
             }
@@ -73,24 +78,31 @@ abstract class ConfigurableService extends Configurable implements ServiceLocato
         return $this->subServices[$id];
     }
 
-    private function buildService($serviceOption)
+    /**
+     * @param      $serviceOption
+     * @param null $interface
+     *
+     * @return null|object
+     * @throws InvalidService
+     */
+    private function buildService($serviceOption, $interface = null)
     {
         if ($serviceOption instanceof ConfigurableService) {
             if (is_null($interface) || is_a($serviceOption, $interface)) {
                 $this->getServiceManager()->propagate($serviceOption);
                 return $serviceOption;
             } else {
-                throw new InvalidService('Service must implements ' . $this->subServiceInterface);
+                throw new InvalidService('Service must implements ' . $interface);
             }
         } elseif (is_array($serviceOption) && isset($serviceOption['class'])) {
             $classname = $serviceOption['class'];
             $options = isset($serviceOption['options']) ? $serviceOption['options'] : [];
             if (is_null($interface) || is_a($classname, $interface, true)) {
-                $serviceInstance = $this->getServiceManager()->build($classname, $options);
-                return $serviceInstance;
+                return $this->getServiceManager()->build($classname, $options);
             } else {
-                throw new InvalidService('Service must implements ' . $this->subServiceInterface);
+                throw new InvalidService('Service must implements ' . $interface);
             }
         }
+        return null;
     }
 }
