@@ -24,7 +24,7 @@ use oat\generis\model\RulesRdf;
  */
 
 
-class ExpressionTest extends \PHPUnit_Framework_TestCase
+class ExpressionTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testEvaluate(){

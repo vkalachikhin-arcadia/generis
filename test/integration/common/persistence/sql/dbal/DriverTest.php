@@ -93,11 +93,11 @@ class DriverTest extends TestCase
     }
 
     /**
-     * @expectedException  \Doctrine\DBAL\DBALException
-     * @expectedExceptionMessage Testing
      */
     public function testMaxAttemptsToConnect()
     {
+        $this->expectException(DBALException::class);
+        $this->expectExceptionMessage('Testing');
         $driver = new TestDbalDriver();
 
         $connectionMock = $this->prophesize(Connection::class);

@@ -22,14 +22,15 @@ namespace oat\generis\test\integration;
 
 
 use oat\oatbox\BasicRegistry;
+use PHPUnit\Framework\TestCase;
 
-class RegistryTest extends \PHPUnit_Framework_TestCase
+class RegistryTest extends TestCase
 {
     /**
      *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
-    public function setUp()
+    public function setUp(): void
     {
     }
     
@@ -69,5 +70,3 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
     
 }
-
-?>

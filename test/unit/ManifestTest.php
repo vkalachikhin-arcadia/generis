@@ -28,7 +28,8 @@ class ManifestTest extends TestCase {
 	const MANIFEST_PATH_LIGHTWEIGHT = 'lightweightManifest.php';
 	const MANIFEST_PATH_COMPLEX = 'complexManifest.php';
 	
-	public function setUp(){
+	public function setUp(): void
+    {
 	}
 	
 	public function testManifestLoading(){

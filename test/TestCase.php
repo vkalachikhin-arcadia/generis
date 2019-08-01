@@ -19,22 +19,23 @@
  */
 namespace oat\generis\test;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Argument;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use common_persistence_Manager;
 use common_persistence_sql_dbal_Driver;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Forward compatibility function for PHPUnit 7.0
      * @param string $exception
-     */
+
     public function expectException($exception)
     {
         $this->setExpectedException($exception);
     }
-
+*/
     /**
      * @param array $services
      * @return ServiceLocatorInterface
@@ -78,8 +79,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * @return \PHPUnit_Framework_MockObject_MockObject
      * @throws \PHPUnit_Framework_Exception
      * @since Method available since Release 5.4.0
-     */
-    protected function createMock($originalClassName)
+
+    protected function createMock($originalClassName): MockObject
     {
         return $this->getMockBuilder($originalClassName)
             ->disableOriginalConstructor()
@@ -97,8 +98,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      * @param array $methods
      * @return \PHPUnit_Framework_MockObject_MockObject
      * @since Method available since Release 5.4.0
-     */
-    protected function createPartialMock($originalClassName, array $methods = [])
+
+    protected function createPartialMock($originalClassName, array $methods = []): MockObject
     {
         return $this->getMockBuilder($originalClassName)
             ->disableOriginalConstructor()
@@ -107,4 +108,5 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             ->setMethods($methods)
             ->getMock();
     }
+     */
 }

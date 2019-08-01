@@ -40,7 +40,7 @@ class PropertyTest extends GenerisPhpUnitTestRunner{
 	 * 
 	 * @author Lionel Lecaque, lionel@taotesting.com
 	 */
-	public function setUp()
+	public function setUp(): void
     {
         GenerisPhpUnitTestRunner::initTest();
         $this->object = new core_kernel_classes_Property(WidgetRdf::PROPERTY_WIDGET);

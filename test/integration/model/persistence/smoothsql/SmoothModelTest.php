@@ -29,13 +29,13 @@ class SmoothModelTest extends GenerisPhpUnitTestRunner
      * 
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    public function setUp():void
     {
         GenerisPhpUnitTestRunner::initTest();
     }
 
     /**
-     *
+     * @doesNotPerformAssertions
      * @author Lionel Lecaque, lionel@taotesting.com
      * @return \core_kernel_persistence_smoothsql_SmoothModel
      */
@@ -89,26 +89,22 @@ class SmoothModelTest extends GenerisPhpUnitTestRunner
     }
 
     /**
-     * 
+     *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testGetUpdatableModelIds()
     {
         $models = core_kernel_persistence_smoothsql_SmoothModel::getUpdatableModelIds();
-        $this->assertArraySubset(array(
-            1
-        ), $models);
+        $this->assertContains(1, $models);
     }
 
     /**
-     * 
+     *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testGetReadableModelIds()
     {
         $models = core_kernel_persistence_smoothsql_SmoothModel::getReadableModelIds();
-        $this->assertArraySubset(array(
-            1
-        ), $models);
+        $this->assertContains(1, $models);
     }
 }

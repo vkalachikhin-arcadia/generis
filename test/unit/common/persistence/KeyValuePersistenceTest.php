@@ -29,7 +29,7 @@ class KeyValuePersistenceTest extends TestCase
     /** @var \common_persistence_Driver */
     protected $driver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->driver = new \common_persistence_InMemoryKvDriver();
 
@@ -64,7 +64,7 @@ class KeyValuePersistenceTest extends TestCase
         
     }
 
-    public function tearDown()
+    public function tearDown():void
     {
         unset($this->largeValuePersistence);
     }

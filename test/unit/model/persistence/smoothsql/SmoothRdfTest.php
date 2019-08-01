@@ -26,13 +26,12 @@ use oat\generis\test\TestCase;
 class SmoothRdfTest extends TestCase
 {
     /**
-     * @expectedException common_Exception
-     * @expectedExceptionMessage Not implemented
-     * 
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testGet()
     {
+        $this->expectException(\common_Exception::class);
+        $this->expectExceptionMessage('Not implemented');
         $prophet = new Prophet();
         $persistence = $prophet->prophesize('\common_persistence_SqlPersistence');
         
@@ -44,13 +43,12 @@ class SmoothRdfTest extends TestCase
     }
 
     /**
-     * @expectedException common_Exception
-     * @expectedExceptionMessage Not implemented
-     * 
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testSearch()
     {
+        $this->expectException(\common_Exception::class);
+        $this->expectExceptionMessage('Not implemented');
         $prophet = new Prophet();
         $persistence = $prophet->prophesize('\common_persistence_SqlPersistence');
         

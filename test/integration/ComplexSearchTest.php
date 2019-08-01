@@ -27,7 +27,8 @@ class ComplexSearchTest extends GenerisPhpUnitTestRunner
 {	
     private $search;
     
-    protected function setUp(){
+    protected function setUp(): void
+    {
         GenerisPhpUnitTestRunner::initTest();
 
 		$this->object = new core_kernel_classes_Class(OntologyRdfs::RDFS_RESOURCE);
@@ -70,4 +71,4 @@ class ComplexSearchTest extends GenerisPhpUnitTestRunner
         }
     }
 }
-?>
+

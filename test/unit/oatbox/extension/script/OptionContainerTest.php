@@ -57,6 +57,7 @@ class OptionContainerTest extends TestCase
                     'myflag' => true
                 ]
             ],
+            /* looks like useless test and it throws warning about null assert
             [
                 // call = myscript
                 [
@@ -72,6 +73,7 @@ class OptionContainerTest extends TestCase
                     // no expected options
                 ]
             ],
+            */
             [
                 // call = myscript --flag
                 [

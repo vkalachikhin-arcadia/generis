@@ -30,7 +30,8 @@ use oat\generis\test\GenerisPhpUnitTestRunner;
  */
 class DbWrapperTest extends GenerisPhpUnitTestRunner {
 
-    protected function setUp(){
+    protected function setUp(): void
+    {
         GenerisPhpUnitTestRunner::initTest();
         $dbWrapper = core_kernel_classes_DbWrapper::singleton();
         //TODO need to connect to a dbWrapper a function createTable that currently not exists
@@ -138,7 +139,7 @@ class DbWrapperTest extends GenerisPhpUnitTestRunner {
         $dbWrapper->exec('DROP TABLE dbtestcase2');
     }
     
-    protected function tearDown(){
+    protected function tearDown(): void{
         $dbWrapper = core_kernel_classes_DbWrapper::singleton();
         //TODO need to connect to a dbWrapper a function dropTable that currently not exists
         $dbWrapper->exec('DROP TABLE "dbTestCase";');

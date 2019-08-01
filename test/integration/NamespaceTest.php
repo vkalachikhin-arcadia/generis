@@ -28,10 +28,11 @@
  * @package generis
  
  */
-class NamespaceTest extends \PHPUnit_Framework_TestCase
+class NamespaceTest extends \PHPUnit\Framework\TestCase
 {
 	
-	public function setUp(){
+	public function setUp(): void
+    {
 	}
 
 	/**

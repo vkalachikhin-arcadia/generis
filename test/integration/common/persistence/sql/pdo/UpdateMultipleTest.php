@@ -13,14 +13,12 @@ class UpdateMultipleTest extends UpdateMultipleTestAbstract
     public function setUpDriver()
     {
         if ($this->driver === null) {
-            $driver = new \common_persistence_sql_pdo_sqlite_Driver();
-            $driver->connect('test_connection', [
-                'driver' => 'pdo_sqlite',
-                'user' => null,
-                'password' => null,
-                'host' => null,
-                'dbname' => ':memory:',
-            ]);
+            if (!extension_loaded('pdo_sqlite')) {
+                $this->markTestSkipped('Php extension pdo_sqlite is not installed.');
+            }
+
+            $driver = new \common_persistence_sql_dbal_Driver();
+            $driver->connect('test_connection', ['connection' => ['url' => 'sqlite:///:memory:']]);
             $this->driver = $driver;
         }
     }

@@ -34,7 +34,8 @@ use oat\generis\test\GenerisPhpUnitTestRunner;
 class CreateInstanceTest extends GenerisPhpUnitTestRunner {
 	protected $class;
 	
-	protected function setUp(){
+	protected function setUp(): void
+    {
 
         GenerisPhpUnitTestRunner::initTest();
 	    $classres = core_kernel_classes_ResourceFactory::create(new core_kernel_classes_Class(OntologyRdfs::RDFS_CLASS), 'TestClass');

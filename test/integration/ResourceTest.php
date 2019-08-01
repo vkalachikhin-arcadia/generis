@@ -35,8 +35,8 @@ use \core_kernel_classes_Triple;
 class ResourceTest extends GenerisPhpUnitTestRunner{
 
 	protected $object;
-	
-	public function setUp()
+
+    public function setUp(): void
 	{
         GenerisPhpUnitTestRunner::initTest();
 
@@ -47,7 +47,7 @@ class ResourceTest extends GenerisPhpUnitTestRunner{
 		$this->clazz = $clazz->createSubClass($clazz);
 	}
 
-	function tearDown()
+    function tearDown(): void
 	{
         $this->clazz->delete();
     }
@@ -662,24 +662,26 @@ class ResourceTest extends GenerisPhpUnitTestRunner{
 	    $instance->delete();
 	    
 	}
-	
-	/**
-	 * @expectedException        common_exception_Error
-	 * @expectedExceptionMessage could not create resource from NULL debug:
-	 * @author Lionel Lecaque, lionel@taotesting.com
-	 */
-	public function testConstructNull(){
-	    $new = new core_kernel_classes_Resource(null);
-	}
-	
-	/**
-	 * @expectedException        common_exception_Error
-	 * @expectedExceptionMessage cannot construct the resource because the uri cannot be empty, debug:
-	 * @author Lionel Lecaque, lionel@taotesting.com
-	 */
-	public function testConstructEmtpy(){
-	    $new = new core_kernel_classes_Resource('');
-	}
+
+    /**
+     * @author Lionel Lecaque, lionel@taotesting.com
+     */
+    public function testConstructNull()
+    {
+        $this->expectException(\common_exception_Error::class);
+        $this->expectExceptionMessage('could not create resource from NULL debug:');
+        $new = new core_kernel_classes_Resource(null);
+    }
+
+    /**
+     * @author Lionel Lecaque, lionel@taotesting.com
+     */
+    public function testConstructEmtpy()
+    {
+        $this->expectException(\common_exception_Error::class);
+        $this->expectExceptionMessage('cannot construct the resource because the uri cannot be empty, debug:');
+        $new = new core_kernel_classes_Resource('');
+    }
 	
 	public function testIsClass()
 	{
@@ -699,21 +701,22 @@ class ResourceTest extends GenerisPhpUnitTestRunner{
 	    $instance->delete();
 	    $sublClass->delete();
 	}
-	/**
-	 * @expectedException        common_exception_DeprecatedApiMethod
-	 * @expectedExceptionMessage Use duplicated instead, because clone resource could not share same uri that original
-	 * @author Lionel Lecaque, lionel@taotesting.com
-	 */
-	public function testClone()
-	{
-	    $class = new core_kernel_classes_Class(GenerisRdf::GENERIS_BOOLEAN,__METHOD__);
-	    $instance = $class->createInstance('test' , 'test');
-	    $clone = clone $instance;
-	       
-	    $instance->delete();
-	    $clone->delete();
-	    
-	}
+
+    /**
+     * @author Lionel Lecaque, lionel@taotesting.com
+     */
+    public function testClone()
+    {
+        $this->expectException(\common_exception_DeprecatedApiMethod::class);
+        $this->expectExceptionMessage('Use duplicated instead, because clone resource could not share same uri that original');
+        $class = new core_kernel_classes_Class(GenerisRdf::GENERIS_BOOLEAN, __METHOD__);
+        $instance = $class->createInstance('test', 'test');
+        $clone = clone $instance;
+
+        $instance->delete();
+        $clone->delete();
+
+    }
 	
 	public function testDuplicate()
 	{

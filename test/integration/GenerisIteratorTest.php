@@ -34,7 +34,7 @@ class GenerisIteratorTest extends GenerisPhpUnitTestRunner {
      */
     private $emptyClass;
 	
-    public function setUp()
+    public function setUp(): void
     {
         GenerisPhpUnitTestRunner::initTest();
         $class = new core_kernel_classes_Class(GenerisRdf::CLASS_GENERIS_RESOURCE);
@@ -55,7 +55,7 @@ class GenerisIteratorTest extends GenerisPhpUnitTestRunner {
         $instance1c1_2 = $class1c1->createInstance('test instance 1c1.2');
     }
     
-    public function tearDown() {
+    public function tearDown(): void {
         foreach ($this->topClass->getInstances(true) as $instance) {
             $instance->delete();
         }

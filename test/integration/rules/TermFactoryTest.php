@@ -29,7 +29,8 @@ use oat\generis\test\GenerisPhpUnitTestRunner;
 class TermFactoryTest extends GenerisPhpUnitTestRunner {
 
 
-	public function setUp(){
+	public function setUp(): void
+    {
 		GenerisPhpUnitTestRunner::initTest();
 	}
 	

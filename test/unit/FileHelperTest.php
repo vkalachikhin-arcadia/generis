@@ -24,7 +24,7 @@ use oat\generis\test\TestCase;
 class FileHelperTest extends TestCase
 {
 
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 

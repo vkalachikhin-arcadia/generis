@@ -29,31 +29,29 @@ class FileRdfTest extends GenerisPhpUnitTestRunner
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    public function setUp():void
     {
         GenerisPhpUnitTestRunner::initTest();
     }
     
     /**
-     * @expectedException common_Exception
-     * @expectedExceptionMessage Not implemented
-     *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testGet()
     {
+        $this->expectException(\common_Exception::class);
+        $this->expectExceptionMessage('Not implemented');
         $rdf = new FileRdf('test');
         $rdf->get(null, null);
     }
     
     /**
-     * @expectedException common_Exception
-     * @expectedExceptionMessage Not implemented
-     *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testAdd()
     {
+        $this->expectException(\common_Exception::class);
+        $this->expectExceptionMessage('Not implemented');
         $triple = new \core_kernel_classes_Triple();
         $triple->modelid = 22;
         $triple->subject = 'subjectUri';
@@ -65,13 +63,12 @@ class FileRdfTest extends GenerisPhpUnitTestRunner
     }
     
     /**
-     * @expectedException common_Exception
-     * @expectedExceptionMessage Not implemented
-     *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testRemove()
     {
+        $this->expectException(\common_Exception::class);
+        $this->expectExceptionMessage('Not implemented');
         $triple = new \core_kernel_classes_Triple();
         $triple->modelid = 22;
         $triple->subject = 'subjectUri';
@@ -84,13 +81,12 @@ class FileRdfTest extends GenerisPhpUnitTestRunner
     
 
     /**
-     * @expectedException common_Exception
-     * @expectedExceptionMessage Not implemented
-     *
      * @author Lionel Lecaque, lionel@taotesting.com
      */
     public function testSearch()
     {
+        $this->expectException(\common_Exception::class);
+        $this->expectExceptionMessage('Not implemented');
         $rdf = new FileRdf('test');
         $rdf->search(null,null);
     }

@@ -27,7 +27,8 @@ use oat\generis\test\GenerisPhpUnitTestRunner;
 class OperationTest extends GenerisPhpUnitTestRunner {
 
 
-	public function setUp(){
+	public function setUp(): void
+    {
 		GenerisPhpUnitTestRunner::initTest();
 	}
 	

@@ -35,7 +35,8 @@ use oat\generis\test\GenerisPhpUnitTestRunner;
 class ClassTest extends GenerisPhpUnitTestRunner {
 	protected $object;
 	
-	protected function setUp(){
+	protected function setUp(): void
+    {
 
         GenerisPhpUnitTestRunner::initTest();
 
@@ -629,4 +630,3 @@ class ClassTest extends GenerisPhpUnitTestRunner {
 		$creativeWorkClass->delete(true);
 	}
 }
-?>

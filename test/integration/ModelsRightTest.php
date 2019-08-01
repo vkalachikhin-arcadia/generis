@@ -24,7 +24,8 @@ use oat\generis\test\GenerisPhpUnitTestRunner;
 
 class ModelsRightTest extends GenerisPhpUnitTestRunner {
 	
-	public function setUp(){
+	public function setUp(): void
+    {
         	GenerisPhpUnitTestRunner::initTest();
 	}
 	

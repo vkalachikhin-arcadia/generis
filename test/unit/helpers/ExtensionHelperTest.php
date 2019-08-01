@@ -33,11 +33,10 @@ class ExtensionHelperTest extends TestCase
     }
 
     /**
-     * @expectedException common_exception_Error
      */
     public function testCyclicDependencies()
     {
-        $ext1 = $this->mockExtension('ext0', ['ext1']);
+        $this->expectException(\common_exception_Error::class);
         $ext1 = $this->mockExtension('ext1', ['ext2']);
         $ext2 = $this->mockExtension('ext2', ['ext3']);
         $ext3 = $this->mockExtension('ext3', ['ext1']);
@@ -45,10 +44,10 @@ class ExtensionHelperTest extends TestCase
     }
 
     /**
-     * @expectedException common_exception_Error
      */
     public function testMissingDependencies()
     {
+        $this->expectException(\common_exception_Error::class);
         $ext1 = $this->mockExtension('ext1', []);
         $ext2 = $this->mockExtension('ext2', ['ext4']);
         $ext3 = $this->mockExtension('ext3', ['ext2','ext4']);

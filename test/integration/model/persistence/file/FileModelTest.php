@@ -30,7 +30,7 @@ class FileModelTest extends GenerisPhpUnitTestRunner
      *
      * @see PHPUnit_Framework_TestCase::setUp()
      */
-    public function setUp()
+    public function setUp():void
     {
     }
 
@@ -79,13 +79,13 @@ class FileModelTest extends GenerisPhpUnitTestRunner
 
     /**
      * @depends testConstruct
-     * @expectedException common_exception_NoImplementation
-     * 
+     *
      * @author Lionel Lecaque, lionel@taotesting.com
      * @param array $model            
      */
     public function testGetRdfsInterface($model)
     {
+        $this->expectException(\common_exception_NoImplementation::class);
         $model->getRdfsInterface();
     }
 
@@ -126,7 +126,7 @@ class FileModelTest extends GenerisPhpUnitTestRunner
         } catch (\Exception $e) {
             $this->assertInstanceOf('\common_exception_Error', $e);
             if ($id == 100) {
-                $this->assertContains('has to be defined with the "xml:base" attribute of the ROOT node', $e->getMessage());
+                $this->assertStringContainsString('has to be defined with the "xml:base" attribute of the ROOT node', $e->getMessage());
             } else {
                 $this->fail('unexpected error');
             }

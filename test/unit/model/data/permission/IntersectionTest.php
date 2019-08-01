@@ -30,7 +30,7 @@ class IntersectionTest extends TestCase
      */
     private $user;
 
-    public function setUp()
+    public function setUp(): void
     {
         $user = $this->prophesize('oat\oatbox\user\User');
         $user->getIdentifier()->willReturn('tastIdentifier\\_of_//User');
@@ -94,10 +94,6 @@ class IntersectionTest extends TestCase
         $permissionModel2->onResourceCreated($resource)->shouldHaveBeenCalled();
         
     }
-    
-    public function testPhpSerialize()
-    {
-        // no idea how to test
-    }
+
     
 }

@@ -32,14 +32,12 @@ class DriverTest extends TestCase
 {
     public function testGetPlatForm()
     {
-        $driver = new common_persistence_sql_pdo_sqlite_Driver();
-        $driver->connect('test_connection', [
-            'driver' => 'pdo_sqlite',
-            'user' => null,
-            'password' => null,
-            'host' => null,
-            'dbname' => ':memory:',
-        ]);
+        if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('Php extension pdo_sqlite is not installed.');
+        }
+
+        $driver = new \common_persistence_sql_dbal_Driver();
+        $driver->connect('test_connection', ['connection' => ['url' => 'sqlite:///:memory:']]);
         $platform = $driver->getPlatform();
         $this->assertInstanceOf(common_persistence_sql_Platform::class, $platform);
         $this->assertInstanceOf(QueryBuilder::class, $platform->getQueryBuilder());

@@ -63,17 +63,17 @@ class TestLoggerTest extends TestCase
     }
 
     /**
-     * @expectedException common_exception_InconsistentData
      */
     public function testGetBadLevel() {
+        $this->expectException(\common_exception_InconsistentData::class);
         $logger = new TestLogger();
         $logger->get('BAD_LEVEL');
     }
 
     /**
-     * @expectedException common_exception_InconsistentData
      */
     public function testHasBadLevel() {
+        $this->expectException(\common_exception_InconsistentData::class);
         $logger = new TestLogger();
         $logger->has('BAD_LEVEL', 'testMessage');
     }

@@ -28,7 +28,7 @@ class LoggerServiceTest extends TestCase {
 	
 	const RUNS = 1000;
     
-    protected function setUp()
+    protected function setUp(): void
     {
 	}
 	

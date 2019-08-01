@@ -34,7 +34,7 @@ class FileSystemComponentTest extends TestCase
     /** @var common_configuration_FileSystemComponent */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -72,7 +72,17 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @doesNotPerformAssertions
+     */
+    public function testSkipIfVfsStreamNotAvailable()
+    {
+        if (!class_exists('org\bovigo\vfs\vfsStream')) {
+            $this->markTestSkipped('VfsStream is not available.');
+        }
+    }
+
+    /**
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testIsReadable()
     {
@@ -84,7 +94,7 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testIsWritable()
     {
@@ -96,7 +106,7 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testIsExecutable()
     {
@@ -112,7 +122,7 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testCheckDirectoryPermissionsSuccess()
     {
@@ -130,7 +140,7 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testCheckFilePermissionsSuccess()
     {
@@ -150,7 +160,7 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testCheckDirectoryContentFailure()
     {
@@ -171,7 +181,7 @@ class FileSystemComponentTest extends TestCase
     }
 
     /**
-     * @depends skipIfVfsStreamNotAvailable()
+     * @depends testSkipIfVfsStreamNotAvailable
      */
     public function testCheckDirectoryContentSuccess()
     {
@@ -189,10 +199,5 @@ class FileSystemComponentTest extends TestCase
         );
     }
 
-    public function skipIfVfsStreamNotAvailable()
-    {
-        if (!class_exists('org\bovigo\vfs\vfsStream')) {
-            $this->markTestSkipped('VfsStream is not available.');
-        }
-    }
+
 }

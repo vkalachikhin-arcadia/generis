@@ -30,7 +30,7 @@ class PhpFilePersistenceTest extends GenerisPhpUnitTestRunner
 {
     private $root;
     
-    public function setUp()
+    public function setUp():void
     {
         if (!class_exists('org\bovigo\vfs\vfsStream')) {
             $this->markTestSkipped(
@@ -60,12 +60,12 @@ class PhpFilePersistenceTest extends GenerisPhpUnitTestRunner
     }
     /**
      * @depends testConnect
-     * @expectedException     common_exception_NotImplemented
      * @author Lionel Lecaque, lionel@taotesting.com
      * @param common_persistence_KeyValuePersistence $persistence
      */
     public function testSetException($persistence)
     {
+        $this->expectException(\common_exception_NotImplemented::class);
         $persistence->set('empty','empty',6);
     }
     

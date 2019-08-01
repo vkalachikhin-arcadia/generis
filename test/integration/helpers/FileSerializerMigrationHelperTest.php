@@ -90,7 +90,7 @@ class FileSerializerMigrationHelperTest extends GenerisTestCase
     /**
      * Initialize test
      */
-    public function setUp()
+    public function setUp():void
     {
         common_Config::load();
         $this->fileMigrationHelper = new MigrationHelper();
@@ -198,7 +198,7 @@ class FileSerializerMigrationHelperTest extends GenerisTestCase
         return $this->tempDirectory;
     }
 
-    protected function tearDown()
+    protected function tearDown():void
     {
         $dir = $this->getTempDirectory();
         $this->testFile = $dir->getFile(self::SAMPLE_FILE);

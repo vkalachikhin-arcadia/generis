@@ -36,7 +36,8 @@ class ApiModelTest extends GenerisPhpUnitTestRunner {
      * Setting the Api to test
      *
      */
-    protected function setUp(){
+    protected function setUp(): void
+    {
 		GenerisPhpUnitTestRunner::initTest();
     	
 		$this->object = core_kernel_impl_ApiModelOO::singleton();

@@ -35,20 +35,20 @@ class UserServiceTestCase extends GenerisPhpUnitTestRunner
 
     private $sampleUser;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::initRoles();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         GenerisPhpUnitTestRunner::initTest();
         $this->service = core_kernel_users_Service::singleton();
         $this->sampleUser = $this->service->addUser(self::TESTCASE_USER_LOGIN, 'pwd' . rand());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         $this->sampleUser->delete();

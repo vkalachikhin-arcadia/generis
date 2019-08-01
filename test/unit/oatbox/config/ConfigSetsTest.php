@@ -40,7 +40,7 @@ class ConfigSetsTest extends TestCase
     /**
      * Configure registry instance
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->configurable = new ConfigurableTestSample([
             'handlers' => [
@@ -74,10 +74,10 @@ class ConfigSetsTest extends TestCase
     }
 
     /**
-     * @expectedException \common_exception_InconsistentData
      */
     public function testHashSetException()
     {
+        $this->expectException(\common_exception_InconsistentData::class);
         $this->configurable->hashSet('key', 'bar', 'baz');
     }
 
